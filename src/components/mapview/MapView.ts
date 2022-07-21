@@ -1,17 +1,43 @@
-import { defineComponent } from 'vue';
-import { usePlacesStore } from '../../composables/usePlacesStore';
+import { defineComponent, onMounted, ref, watch } from 'vue'
+import Mapboxgl from 'mapbox-gl'
 
+import { usePlacesStore } from '@/composables'
 
 export default defineComponent({
   name: 'MapView',
   setup() {
 
-    const { isLoading, userLocation, isUserLocationReady } = usePlacesStore()
+    const mapElement = ref<HTMLDivElement>()
+    const { userLocation, isUserLocationReady } = usePlacesStore()
+
+    const initMap = async () => {
+
+      if ( !mapElement.value ) throw new Error('Div Element does not exist')
+      if ( !userLocation.value ) throw new Error('user location does not exist')
+
+      await Promise.resolve()
+
+      const map = new Mapboxgl.Map({
+        container: mapElement.value, // container ID
+        style: 'mapbox://styles/mapbox/light-v10', // style URL
+        center: userLocation.value,
+        zoom: 15 // starting zoom
+      })
+
+    }
+
+
+    onMounted(() => {
+        if ( isUserLocationReady.value ) return initMap()
+    })
+
+    watch( isUserLocationReady, () => {
+      if ( isUserLocationReady.value ) initMap()
+    })
 
     return {
-      isLoading,
-      userLocation,
-      isUserLocationReady
+        isUserLocationReady,
+        mapElement
     }
   }
 })
