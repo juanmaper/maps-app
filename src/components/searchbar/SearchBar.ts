@@ -13,6 +13,7 @@ export default defineComponent({
     const debounceTimeout = ref();
     const debouncedValue = ref('');
 
+    const { searchPlacesByTerm } = usePlacesStore();
 
 
     return {
@@ -28,6 +29,7 @@ export default defineComponent({
           
           debounceTimeout.value = setTimeout(() => {
             debouncedValue.value = val;
+            searchPlacesByTerm( val );
           }, 500 );
         }
       })
