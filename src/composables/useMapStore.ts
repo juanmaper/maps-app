@@ -5,6 +5,7 @@ import { StateInterface } from '@/store';
 import Mapboxgl from 'mapbox-gl';
 
 import { Feature } from '@/interfaces/places';
+import { LngLat } from '@/store/map/actions';
 
 export const useMapStore = () => {
 
@@ -22,6 +23,7 @@ export const useMapStore = () => {
         // Mutations
         setMap: ( map: Mapboxgl.Map ) => store.commit('map/setMap', map ),
         setPlaceMarkers: ( places: Feature[] ) => store.commit('map/setPlaceMarkers', places ),
+        getRouteBetweenPoints: ( start: LngLat, end: LngLat ) => store.dispatch('map/getRouteBetweenPoints', { start, end } )
 
     }
 }
