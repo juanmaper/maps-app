@@ -26,7 +26,7 @@ const actions: ActionTree<PlacesState, StateInterface> = {
         }
 
         if ( !state.userLocation ){
-            throw new Error('No hay ubicación del usuario');
+            throw new Error('No user location');
         }
 
         commit('setIsLoadingPlaces');
