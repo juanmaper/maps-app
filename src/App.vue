@@ -29,6 +29,6 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 100px;
+  width: 75px;
 }
 </style>
