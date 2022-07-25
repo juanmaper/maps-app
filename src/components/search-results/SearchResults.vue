@@ -2,8 +2,8 @@
 <template>
     <div v-if="isLoadingPlaces"
         class="alert alert-primary text-center">
-        <h5>Cargando</h5>
-        <span>Espere por favor...</span>
+        <h5>Loading</h5>
+        <span>Wait, please...</span>
     </div>
     <ul v-else-if="places.length > 0"
         class="list-group mt-3">
@@ -21,7 +21,7 @@
                     :class="( place.id === activePlace ) ? 'btn-outline-light': 'btn-outline-primary'"
                     @click.self="getRouteDirections( place )"
                 >
-                    Direcciones
+                    Trace route
                 </button>
             </div>
         </li>
